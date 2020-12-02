@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -34,22 +33,22 @@ func sumslice(ints []int) int {
 	return sum
 }
 
-func Sums2(sum, count int, base, remainder []int) ([]int, error) {
+func Sums2(sum, count int, base, remainder []int) ([]int, bool) {
 	if len(base)+len(remainder) < count {
-		return nil, fmt.Errorf("ints with sum of %d not found", sum)
+		return nil, false
 	}
 	for i := range remainder[1:] {
 		if len(base) < count-1 {
 			if i+1 >= len(remainder) {
-				return nil, fmt.Errorf("no more ints to check with base=%v remainder=%v", base, remainder)
+				return nil, false
 			}
-			result, err := Sums2(sum, count, append(base, remainder[i]), remainder[i+1:])
-			if err == nil {
-				return result, err
+			result, found := Sums2(sum, count, append(base, remainder[i]), remainder[i+1:])
+			if found {
+				return result, found
 			}
 		} else if sumslice(append(base, remainder[i])) == sum {
-			return append(base, remainder[i]), nil
+			return append(base, remainder[i]), true
 		}
 	}
-	return nil, fmt.Errorf("not found...")
+	return nil, false
 }

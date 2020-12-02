@@ -15,9 +15,9 @@ func main() {
 		panic(err)
 	}
 
-	result, err := lib.Sums2(2020, 2, []int{}, ints)
+	result, _ := lib.Sums2(2020, 2, []int{}, ints)
 	fmt.Printf("%d x %d = %d\n", result[0], result[1], lib.Multiply(result))
 
-	result, err = lib.Sums2(2020, 3, []int{}, ints)
+	result, _ = lib.Sums2(2020, 3, []int{}, ints)
 	fmt.Printf("%d x %d x %d = %d\n", result[0], result[1], result[2], lib.Multiply(result))
 }
