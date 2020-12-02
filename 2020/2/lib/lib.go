@@ -43,6 +43,10 @@ func (p passwordPolicy) Valid() bool {
 	return occ[p.letter] >= p.min && occ[p.letter] <= p.max
 }
 
+func (p passwordPolicy) Valid2() bool {
+	return (rune(p.Password[p.min-1]) == p.letter) != (rune(p.Password[p.max-1]) == p.letter)
+}
+
 func ParseMinMax(input string) (int, int, error) {
 	tokens := strings.Split(input, "-")
 	if len(tokens) != 2 {
